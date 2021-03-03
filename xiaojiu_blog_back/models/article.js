@@ -2,6 +2,7 @@
 const {
     Model
 } = require('sequelize');
+console.log('wfwf')
 module.exports = (sequelize, DataTypes) => {
     class Article extends Model {
         /**
