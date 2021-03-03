@@ -1,0 +1,9 @@
+#!/bin/bash
+HOST="localhost"
+DB="express_blog"
+USER="express_blog"
+PASS="test1234"
+PORT="3306"
+DIR="../db/models"
+JSON_DEFINED="../db/definitions.json"
+EXEC="sequelize-auto -o ${DIR} -d ${DB} -h ${HOST} -u ${USER} -p ${PORT} -x ${PASS} -e mysql -a ${JSON_DEFINED}"

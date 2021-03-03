@@ -1,0 +1,23 @@
+{
+    "development": {
+        "username": "root",
+        "password": "sunliquan123",
+        "database": "musicdesign",
+        "host": "localhost",
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "root",
+        "password": "sunliquan123",
+        "database": "musicdesign",
+        "host": "localhost",
+        "dialect": "mysql"
+    },
+    "production": {
+        "username": "root",
+        "password": "sunliquan123",
+        "database": "musicdesign",
+        "host": "localhost",
+        "dialect": "mysql"
+    }
+}
