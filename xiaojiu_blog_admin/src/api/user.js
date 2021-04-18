@@ -18,6 +18,9 @@ export function logout(data) {
     return request('post', 'users/getInfo', data)
 }
 
+export function update(data) {
+    return request('post', 'users/update', data)
+}
 
 export function getAllAdmin(data) {
     return request('get', 'users/allAdmin', data)

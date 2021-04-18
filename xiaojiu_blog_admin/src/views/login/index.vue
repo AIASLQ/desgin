@@ -6,16 +6,16 @@
         <h3 class="title">小九的blog管理系统</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="mobile">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
-          type="text"
+          ref="mobile"
+          v-model="loginForm.mobile"
+          placeholder="mobile"
+          name="mobile"
+          type="tel"
           tabindex="1"
           auto-complete="on"
         />
@@ -47,13 +47,13 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
+import { validMobile } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
+      if (!validMobile(value)) {
         callback(new Error('请输入正确的用户名'))
       } else {
         callback()
@@ -68,11 +68,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
+        mobile: 15567172267,
         password: '123456'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        mobile: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
@@ -104,6 +104,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.loginForm.type = 1
           this.$store.dispatch('user/reg', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/login' })
             this.loading = false

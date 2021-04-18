@@ -6,7 +6,7 @@ const getDefaultState = () => {
     return {
         token: getToken(),
         nickname: '',
-        username: '',
+        mobile: '',
         avatar: ''
     }
 }
@@ -26,16 +26,17 @@ const mutations = {
     SET_AVATAR: (state, avatar) => {
         state.avatar = avatar
     },
-    SET_USERNAME: (state, username) => {
-        state.username = username
+    SET_USERNAME: (state, mobile) => {
+        state.mobile = mobile
     }
 }
 
 const actions = {
     reg({ commit }, userInfo) {
-        const { username, password } = userInfo
+        const { mobile, password } = userInfo
         return new Promise((resolve, reject) => {
-            register({ username: username.trim(), password: password }).then(response => {
+            debugger
+            register({ mobile: Number(mobile), password: password }).then(response => {
                 resolve()
             }).catch(error => {
                 reject(error)
@@ -43,9 +44,9 @@ const actions = {
         })
     },
     login({ commit }, userInfo) {
-        const { username, password } = userInfo
+        const { mobile, password } = userInfo
         return new Promise((resolve, reject) => {
-            login({ username: username.trim(), password: password }).then(response => {
+            login({ mobile: mobile, password: password }).then(response => {
                 const { data } = response
                 commit('SET_TOKEN', data.token)
                 setToken(data.token)
@@ -64,10 +65,10 @@ const actions = {
                 if (!data) {
                     return reject('请重新登录')
                 }
-                const { nickname, avatar, username } = data
+                const { nickname, avatar, mobile } = data
                 commit('SET_NICKNAME', nickname)
                 commit('SET_AVATAR', avatar)
-                commit('SET_USERNAME', username)
+                commit('SET_USERNAME', mobile)
                 resolve(data)
             }).catch(error => {
                 reject(error)

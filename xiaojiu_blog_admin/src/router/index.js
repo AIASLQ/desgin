@@ -117,18 +117,18 @@ export const constantRoutes = [{
     {
         path: '/opus',
         component: Layout,
-        redirect: '/opus/vue',
+        redirect: '/opus/singer',
         name: 'setting',
         meta: {
-            title: '作品管理',
+            title: '歌星管理',
             icon: 'el-icon-postcard'
         },
         children: [{
-                path: 'vue',
+                path: 'singer',
                 component: () =>
                     import ('@/views/myOpus/vueWorks/index'),
                 name: 'vue',
-                meta: { title: 'vue项目', icon: 'el-icon-notebook-1' }
+                meta: { title: '歌星', icon: 'el-icon-notebook-1' }
             },
             {
                 path: 'react',

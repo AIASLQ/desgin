@@ -73,6 +73,7 @@
             <el-input v-model="articleForm.coverImg" placeholder="请填写封面图片链接或者上传一张图片作为封面"></el-input>
           </el-form-item>
         </el-col>
+       
         <!-- <el-col :span="2" > 或</el-col> -->
         <el-col :span="3" :offset="1">
           <el-upload

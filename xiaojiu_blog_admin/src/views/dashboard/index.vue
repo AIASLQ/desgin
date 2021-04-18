@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">欢迎您: {{ username }}</div>
+    <div class="dashboard-text">欢迎您: {{ mobile }}</div>
     <br />
     <div class="img">
 
@@ -122,7 +122,7 @@ export default {
     // this.drawLine();
   },
   computed: {
-    ...mapGetters(["username"]),
+    ...mapGetters(["mobile"]),
   },
 };
 </script>
