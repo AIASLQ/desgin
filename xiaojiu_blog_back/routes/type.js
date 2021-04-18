@@ -30,9 +30,7 @@ router.post('/addEidtType', async(req, res) => {
  *  @access 接口是公开的
  */
 router.get('/getAllType', async(req, res) => {
-
     let result = await models.Type.findAll()
-    console.log(result);
     new Result(result, '获取所有分类成功').success(res)
 })
 

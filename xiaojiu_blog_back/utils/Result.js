@@ -6,16 +6,16 @@ const { CODE_ERROR, CODE_SUCCESS, CODE_TOKEN_EXPIRED, CODE_REPEAT, CODE_WARNING 
  */
 
 class Result {
-    constructor ( data, msg = '操作成功', options) {
+    constructor(data, msg = '操作成功', options) {
         this.data = null
-        if(arguments.length === 0){
+        if (arguments.length === 0) {
             this.msg = '操作成功'
         } else if (arguments.length === 1) {
             this.msg = data
         } else {
-            this.data = data 
-            this.msg = msg 
-            if(options) {
+            this.data = data
+            this.msg = msg
+            if (options) {
                 this.options = options
             }
         }
@@ -35,7 +35,7 @@ class Result {
         }
 
         if (this.options) {
-            base = { ...base, ...this.options}
+            base = {...base, ...this.options }
         }
         return base;
     }
@@ -59,8 +59,12 @@ class Result {
         this.json(res)
     }
 
-    repeat(res){
+    repeat(res) {
         this.code = CODE_REPEAT
+        this.json(res)
+    }
+    authError(res) {
+        this.code = CODE_TOKEN_EXPIRED
         this.json(res)
     }
 

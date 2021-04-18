@@ -12,29 +12,27 @@ const Result = require('../utils/Result')
  *  @access 接口是公开的
  */
 // # TODU this
-router.post('/AllArticle', async function (req, res, next) {
+router.post('/AllArticle', async function(req, res, next) {
     let currentPage = parseInt(req.body.currentPage) || 1
     let pageSize = parseInt(req.body.pageSize) || 5
     let where = {};
-    console.log(req.body.typeId)
     if (req.body.typeId) {
         where.typeId = req.body.typeId
     }
     if (req.body.status) {
         where.status = req.body.status
     }
-
     let keyword = req.body.keyword
-
     if (keyword) {
         where.keyword = {
             [Op.like]: '%' + keyword + '%'
         }
     }
-
     let result = await models.Article.findAndCountAll({
-        order: [['id', 'DESC']], //倒叙的方式输出 对比id 默认为ASC正序
-        where,   //模糊查询的条件
+        order: [
+            ['id', 'DESC']
+        ], //倒叙的方式输出 对比id 默认为ASC正序
+        where, //模糊查询的条件
         offset: (currentPage - 1) * pageSize,
         limit: pageSize,
         include: [{
@@ -45,7 +43,6 @@ router.post('/AllArticle', async function (req, res, next) {
             attributes: ['nickname']
         }]
     })
-
     const data = {
         articles: result.rows,
         pagination: {
@@ -62,7 +59,7 @@ router.post('/AllArticle', async function (req, res, next) {
  *  @desc 获取单个文章
  *  @access 接口是公开的
  */
-router.get('/getDetail/:id', async (req, res) => {
+router.get('/getDetail/:id', async(req, res) => {
     var article = await models.Article.findOne({
         where: { id: req.params.id },
         // attributes: ['title', 'desc', 'status', 'userId', 'typeId', 'coverImg', 'content'],
@@ -82,7 +79,7 @@ router.get('/getDetail/:id', async (req, res) => {
  *  @desc 新增文章
  *  @access 接口是私有的
  */
-router.post('/addEditArticle', async (req, res) => {
+router.post('/addEditArticle', async(req, res) => {
     console.log(req.body)
     if (req.body.id) {
         let article = await models.Article.update(req.body, {
@@ -101,9 +98,9 @@ router.post('/addEditArticle', async (req, res) => {
  *  @desc 修改文章
  *  @access 接口是私有的
  */
-router.put('/update/:id', async (req, res) => {
+router.put('/update/:id', async(req, res) => {
     var article = await models.Article.findByPk(req.params.id)
-    article.update(req.body)//findByPk查找主键id
+    article.update(req.body) //findByPk查找主键id
     res.json({ article: article })
 })
 
@@ -112,7 +109,7 @@ router.put('/update/:id', async (req, res) => {
  *  @desc 删除文章
  *  @access 接口是私有的
  */
-router.post('/delArticle/:id', async (req, res) => {
+router.post('/delArticle/:id', async(req, res) => {
     console.log(req.params.id)
     var article = await models.Article.findByPk(req.params.id)
     article.destroy()
@@ -121,7 +118,7 @@ router.post('/delArticle/:id', async (req, res) => {
 
 
 
-router.get('/getAll', async (req, res) => {
+router.get('/getAll', async(req, res) => {
     let result = await models.Article.findAll({
         attributes: { exclude: ['typeId', 'TypeId', 'UserId'] },
         limit: 5,
@@ -141,9 +138,11 @@ router.get('/getAll', async (req, res) => {
  *  @desc   获取最新的五篇文章  用于首页展示
  *  @access 接口是公开的
  */
-router.get('/getHotArticle', async (req, res) => {
+router.get('/getHotArticle', async(req, res) => {
     let result = await models.Article.findAll({
-        order: [['id', 'DESC']], //倒叙的方式输出 对比id 默认为ASC正序
+        order: [
+            ['id', 'DESC']
+        ], //倒叙的方式输出 对比id 默认为ASC正序
         limit: 5,
         attributes: { exclude: ['typeId', 'TypeId', 'UserId'] },
         limit: 5,
@@ -157,4 +156,4 @@ router.get('/getHotArticle', async (req, res) => {
     })
     new Result(result, '获取成功').success(res)
 })
-module.exports = router;  
+module.exports = router;
